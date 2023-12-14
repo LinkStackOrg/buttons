@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Names</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+            color: black;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333;
+                color: #fff;
+            }
+        }
+
+        pre {
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    fetch('https://raw.githubusercontent.com/LinkStackOrg/LinkStack/main/database/seeders/ButtonSeeder.php')
+        .then(response => response.text())
+        .then(data => {
+            const names = data.match(/'name'\s*=>\s*'(.+?)'/g).map(match => match.match(/'name'\s*=>\s*'(.+?)'/)[1]);
+            const namesString = names.join('\n');
+            document.body.innerHTML = '<pre>' + namesString + '</pre>';
+        })
+        .catch(error => console.error('Error fetching file:', error));
+</script>
+
+</body>
+</html>
